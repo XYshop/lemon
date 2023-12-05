@@ -1,29 +1,30 @@
 <script setup>
-import { onMounted } from "vue";
 import { useRouter } from 'vue-router'
-import { useProductStore } from "../../store/index.js";
 
-const store = useProductStore()
 const router = useRouter()
 
 function toCart() {
-  router.push('/shop/cart')
+  router.push('/shopping/cart')
 }
 
 function toShop() {
-  router.push('/shop')
+  router.push('/shopping')
 }
 
-onMounted(() => {
-  store.getJson()
-})
+function logout() {
+  window.localStorage.clear()
+  router.push('/login')
+}
 </script>
 
 <template>
   <div class="shop-layout">
     <div class="shop-nav">
+      <button @click="logout">
+        <i class="fa-solid fa-circle-user"></i>logout
+      </button>
       <button @click="toShop">
-        <i class="fa-solid fa-circle-user"></i>Shop
+        <i class="fa-solid fa-circle-user"></i>shop
       </button>
       <button @click="toCart">
         <i class="fa-regular fa-cart-shopping"></i>
@@ -37,9 +38,15 @@ onMounted(() => {
 .shop-layout {
   max-width: 800px;
   margin: 3% auto;
+
   .shop-nav {
     display: flex;
-    :first-child {
+
+    button {
+      text-transform: uppercase;
+    }
+
+    :first-child + button {
       margin-left: auto;
     }
   }

@@ -1,2 +1,1 @@
-export * from './shop.store.js'
-
+export * from './shopping.store.js'

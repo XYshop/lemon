@@ -1,8 +1,8 @@
-import {createPinia} from "pinia";
+import { createPinia } from 'pinia'
 
 const pinia = createPinia()
 
-const stores = [];
+// const stores = [];
 
 // (async () => {
 //   const modules = import.meta.glob('../store/*/index.js')
@@ -15,6 +15,5 @@ const stores = [];
 
 export default pinia
 
-export * from "./product"
-
-
+export * from './product'
+export * from './login'

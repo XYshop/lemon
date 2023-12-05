@@ -1,33 +1,33 @@
-import {createRouter, createWebHashHistory} from "vue-router";
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
   {
     path: '/',
-    redirect: '/shop'
+    redirect: '/shopping'
   },
-  // {
-  //   path: '/main',
-  //   name: 'main',
-  //   component: () => import('@/')
-  // },
   {
-    path: '/shop',
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/login/Login.vue')
+  },
+  {
+    path: '/shopping',
     component: () => import('../views/shop/Shop.vue'),
     children: [
       {
         path: '',
-        meta: {name: 'joy', age: 18},
+        meta: { name: 'joy', age: 18 },
         component: () => import('../views/shop/product-list/ProductList.vue')
       },
       {
         path: 'product',
         name: 'product',
-        // component: () => import('@/views/router-demo/shop/Shopping.vue')
+        component: () => import('../views/shop/product-list/ProductList.vue')
       },
       {
         path: 'product/:id',
         name: 'product',
-        // component: () => import('@/components/product/ProductDetails.vue'),
+        component: () => import('../components/shopping/Product.vue'),
         beforeEnter: () => {
           console.log('beforeEnter, I am beforeEnter!')
         }
@@ -35,7 +35,7 @@ const routes = [
       {
         path: 'cart',
         name: 'cart',
-        // component: () => import('@/views/router-demo/cart/ShoppingCart.vue')
+        component: () => import('../views/shop/shopping-cart/ShoppingCart.vue')
       }
     ]
   },
@@ -48,16 +48,19 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: routes
+  routes
 })
 
-router.beforeEach(() => console.log('beforeEach, I listen to each route!'))
+router.beforeEach((to) => {
+  if (!window.localStorage.getItem('token') && to.path !== '/login') {
+    return { name: 'login' }
+  }
+})
 
 router.beforeResolve(() =>
-    console.log('beforeResolve, I resolve for each route!')
+  console.log('beforeResolve, I resolve for each route!')
 )
 
 router.afterEach(() => console.log('beforeResolve, over!'))
 
 export default router
-

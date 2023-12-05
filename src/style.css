@@ -16,7 +16,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-h2, p {
+body, h2, p {
   margin:  0;
 }
 

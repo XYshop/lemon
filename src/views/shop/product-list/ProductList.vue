@@ -1,11 +1,22 @@
 <script setup>
-import { useProductStore } from "../../../store/index.js";
-import { onMounted } from "vue";
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { useShoppingStore } from '../../../store/index.js'
 
-const store = useProductStore()
+const store = useShoppingStore()
+
+const router = useRouter()
+
+async function addToCart(product) {
+  const res = await store.addToCart(product)
+  if (res.code === 0) {
+    store.getCheckOutProducts()
+    router.push({ name: 'cart' })
+  }
+}
 
 onMounted(() => {
-  store.getJson()
+  store.getProducts()
 })
 </script>
 
@@ -13,10 +24,10 @@ onMounted(() => {
   <template v-for="product of store.products" :key="product.id">
     <div class="product-layout">
       <div class="product-head">
-        <router-link :to="'shop/product/' + product.id">
+        <router-link :to="'shopping/product/' + product.id">
           <h2>{{ product.title }}</h2>
         </router-link>
-        <button>Add to Cart</button>
+        <button @click="addToCart(product)">Add to Cart</button>
       </div>
       <p>{{ product.description }}</p>
       <span>{{ product.price }}</span>
