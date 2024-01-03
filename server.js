@@ -10,6 +10,11 @@ const router = new Router()
 
 const filePath = fileURLToPath(import.meta.url)
 
+const DEMO_LIST_DATA = path.join(
+  dirname(filePath),
+  '/public/static/home/demo-list-data.json'
+)
+
 const PRODUCT_DATA_FILE = path.join(
   dirname(filePath),
   '/public/static/shopping/server-product-data.json'
@@ -54,6 +59,15 @@ router.post('/login', async (ctx) => {
     code: 0,
     message: 'success',
     token: API_TOKEN
+  }
+})
+
+router.get('/home', authenticatedRoute, async (ctx) => {
+  const data = fs.readFileSync(DEMO_LIST_DATA, 'utf-8')
+  ctx.body = {
+    code: 0,
+    message: 'success',
+    data: JSON.parse(data)
   }
 })
 

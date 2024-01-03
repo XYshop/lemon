@@ -5,10 +5,12 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  box-sizing: border-box;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: black;
+  /* color-scheme: light dark; */
+
+  background-color: #f4f4f4;
+  color: #333;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -16,8 +18,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body, h2, p {
-  margin:  0;
+body, *, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body,
+h2,
+p {
+  margin: 0;
 }
 
 a {

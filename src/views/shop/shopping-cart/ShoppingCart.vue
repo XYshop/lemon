@@ -1,49 +1,52 @@
 <script setup>
-import { onMounted } from 'vue'
-import { useShoppingStore } from '../../../store/index.js'
+import { onMounted } from "vue";
+import { useShoppingStore } from "../../../store/index.js";
 
-const store = useShoppingStore()
+const store = useShoppingStore();
 
 async function addToCart(product) {
-  const res = await store.addToCart(product)
+  const res = await store.addToCart(product);
   if (res.code === 0) {
-    await store.getCheckOutProducts()
+    await store.getCheckOutProducts();
   }
 }
 
 async function removeFormCart(id) {
-  const res = await store.removeFormCart(id)
+  const res = await store.removeFormCart(id);
   if (res.code === 0) {
-    await store.getCheckOutProducts()
+    await store.getCheckOutProducts();
   }
 }
 
 async function emptyCart() {
-  const res = await store.clearCart()
+  const res = await store.clearCart();
   if (res.code === 0) {
-    await store.getCheckOutProducts()
+    await store.getCheckOutProducts();
   }
 }
 
 onMounted(() => {
-  store.getCheckOutProducts()
-})
-
+  store.getCheckOutProducts();
+});
 </script>
 
 <template>
   <div class="cart">
     <template
-        v-for="checkOutProduct in store.checkOutProducts"
-        :key="checkOutProduct.id"
+      v-for="checkOutProduct in store.checkOutProducts"
+      :key="checkOutProduct.id"
     >
       <div class="product">
         <div>
           <span>{{ checkOutProduct.title }}</span>
           <span class="icons">
-            <i class="fa-solid fa-circle-up" @click="addToCart(checkOutProduct)"></i>
-            <i class="fa-solid fa-circle-down"
-               @click="removeFormCart(checkOutProduct.id)"
+            <i
+              class="fa-solid fa-circle-up"
+              @click="addToCart(checkOutProduct)"
+            ></i>
+            <i
+              class="fa-solid fa-circle-down"
+              @click="removeFormCart(checkOutProduct.id)"
             >
             </i>
           </span>
@@ -96,5 +99,4 @@ button {
     margin-left: 0.5em;
   }
 }
-
 </style>

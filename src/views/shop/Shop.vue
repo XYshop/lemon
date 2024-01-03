@@ -1,19 +1,19 @@
 <script setup>
-import { useRouter } from 'vue-router'
+import { useRouter } from "vue-router";
 
-const router = useRouter()
+const router = useRouter();
 
 function toCart() {
-  router.push('/shopping/cart')
+  router.push("/shopping/cart");
 }
 
 function toShop() {
-  router.push('/shopping')
+  router.push("/shopping");
 }
 
 function logout() {
-  window.localStorage.clear()
-  router.push('/login')
+  window.localStorage.clear();
+  router.push("/login");
 }
 </script>
 
@@ -50,9 +50,5 @@ function logout() {
       margin-left: auto;
     }
   }
-}
-
-.router {
-  color: ghostwhite;
 }
 </style>

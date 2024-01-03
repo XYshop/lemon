@@ -1,10 +1,10 @@
 <script setup>
-import { onMounted } from 'vue'
-import { useRoute, onBeforeRouteUpdate } from 'vue-router'
-import { useShoppingStore } from '../../store/index.js'
+import { onMounted } from "vue";
+import { useRoute, onBeforeRouteUpdate } from "vue-router";
+import { useShoppingStore } from "../../store/index.js";
 
-const store = useShoppingStore()
-const route = useRoute()
+const store = useShoppingStore();
+const route = useRoute();
 
 /**
  * @name onBeforeRouteUpdate
@@ -12,16 +12,16 @@ const route = useRoute()
  */
 
 onBeforeRouteUpdate((to) => {
-  console.log('beforeRouteUpdate, I am here!')
+  console.log("beforeRouteUpdate, I am here!");
   if (Number(to.params.id) > 4) {
-    return { name: 'notFound' }
+    return { name: "notFound" };
   }
-  store.getProductDetails(route.params.id)
-})
+  store.getProductDetails(route.params.id);
+});
 
 onMounted(() => {
-  store.getProductDetails(route.params.id)
-})
+  store.getProductDetails(route.params.id);
+});
 </script>
 
 <template>
@@ -41,7 +41,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
 .details {
   width: 480px;
   margin: 0 auto;
@@ -73,5 +72,4 @@ img {
   width: 240px;
   object-fit: contain;
 }
-
 </style>

@@ -1,23 +1,23 @@
 <script setup>
-import { onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { useShoppingStore } from '../../../store/index.js'
+import { onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { useShoppingStore } from "../../../store/index.js";
 
-const store = useShoppingStore()
+const store = useShoppingStore();
 
-const router = useRouter()
+const router = useRouter();
 
 async function addToCart(product) {
-  const res = await store.addToCart(product)
+  const res = await store.addToCart(product);
   if (res.code === 0) {
-    store.getCheckOutProducts()
-    router.push({ name: 'cart' })
+    store.getCheckOutProducts();
+    router.push({ name: "cart" });
   }
 }
 
 onMounted(() => {
-  store.getProducts()
-})
+  store.getProducts();
+});
 </script>
 
 <template>
